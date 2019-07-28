@@ -1,0 +1,46 @@
+.repoItemView {
+  background: white;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 10px solid #f4f6f8;
+  .title {
+    text {
+      font-size: 36px;
+      color: #24292e;
+    }
+  } // .title end
+
+  .desc {
+    margin-top: 20px;
+    color: #586069;
+    font-size: 24px;
+    word-wrap: inherit;
+  } // .desc end
+  .prop {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .propItem {
+      width: 100px;
+      height: 60px;
+      background: #f4f6f8;
+    } // .propItem
+  } // .prop
+  .buildBy {
+    margin-top: 20px;
+    widows: 90%;
+    display: flex;
+    flex-direction: row;
+    .avatarImage {
+      margin-left: 10px;
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      border-radius: 6px;
+    } //avatarImage
+  } // buildBy
+}

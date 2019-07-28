@@ -17,11 +17,12 @@ class App extends Component {
       'pages/topics/index',
       'pages/me/index'
     ],
+    
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#0366d6',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'white'
     },
     tabBar: {
       list: [
