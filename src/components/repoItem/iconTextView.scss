@@ -1,0 +1,18 @@
+.iconTextView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+
+
+  .iconTextImage {
+    width: 40px;
+    height: 40px;
+  } // iconTextImage
+  .iconTextText {
+    margin-left: 6px;
+    color: #586069;
+    font-size: 28px;
+    line-height: 40px;
+  } // iconTextImage
+}

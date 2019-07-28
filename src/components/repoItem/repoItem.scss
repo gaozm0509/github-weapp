@@ -16,7 +16,7 @@
   .desc {
     margin-top: 20px;
     color: #586069;
-    font-size: 24px;
+    font-size: 28px;
     word-wrap: inherit;
   } // .desc end
   .prop {
@@ -30,17 +30,26 @@
       background: #f4f6f8;
     } // .propItem
   } // .prop
-  .buildBy {
+
+  .bottomView {
     margin-top: 20px;
-    widows: 90%;
     display: flex;
     flex-direction: row;
-    .avatarImage {
-      margin-left: 10px;
-      width: 50px;
-      height: 50px;
-      overflow: hidden;
-      border-radius: 6px;
-    } //avatarImage
-  } // buildBy
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    .buildBy {
+      widows: 90%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .avatarImage {
+        margin-left: 10px;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 6px;
+      } //avatarImage
+    } // buildBy
+  } //bottomView
 }

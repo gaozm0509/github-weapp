@@ -1,5 +1,11 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import IconTextView from './iconTextView'
+import LangView from './langView'
+import icon_text_fork from '../../assets/images/icon_text_fork.svg'
+import icon_text_star from '../../assets/images/icon_text_star.svg'
+
+import './repoItem.scss'
 
 export default class RepoItem extends Taro.PureComponent {
     constructor(props) {
@@ -43,12 +49,17 @@ export default class RepoItem extends Taro.PureComponent {
                 </View>
                 <View className='desc'>{_data.desc}</View>
                 <View className='prop'>
-                    <View className='propItem'></View>
-                    <View className='propItem'></View>
-                    <View className='propItem'></View>
-                    <View className='propItem'></View>
+                    {_data.lang ? <LangView title={_data.lang} bgColor={'f1e05a'} /> : ''}
+                    {_data.stars ? <IconTextView title={_data.stars} image={icon_text_star} /> : ''}
+                    {_data.forks ? <IconTextView title={_data.forks} image={icon_text_fork} /> : ''}
                 </View>
-                {avatarsView}
+                <View className='bottomView'>
+                    {avatarsView}
+                    {_data.added_stars ? <IconTextView title={_data.added_stars} image={icon_text_star} /> : ''}
+
+
+                </View>
+
 
             </View>
         )

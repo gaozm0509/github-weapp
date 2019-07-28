@@ -1,0 +1,18 @@
+.langView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+  .langViewDot {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  .langViewText {
+    margin-left: 6px;
+    color: #586069;
+    font-size: 28px;
+    line-height: 40px;
+  }
+}
