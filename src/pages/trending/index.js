@@ -1,8 +1,12 @@
 import Taro, { PureComponent } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Swiper, SwiperItem, ScrollView, } from '@tarojs/components'
 import netWork from '../../net/netWork'
 import { Loading } from '../../components/loading'
 import RepoItem from '../../components/repoItem/repoItem'
+import { AtSegmentedControl } from 'taro-ui'
+import CustomNavBar from '../../components/customNavBar/customNavBar'
+
+import GlobalData from '../../utils/globalData'
 
 import './index.scss'
 import { from } from 'rxjs';
@@ -13,15 +17,19 @@ export default class Index extends PureComponent {
   config = {
     navigationBarTitleText: '首页',
     enablePullDownRefresh: true,
+    navigationStyle: 'custom'
     // onReachBottomDistance: 50,
+
   }
   constructor(props) {
     super(props)
 
     this.state = {
       data: [],
+      developer: [],
       count: 0,
       isLoaded: false,
+      curren: 0
     }
   }
 
@@ -37,7 +45,12 @@ export default class Index extends PureComponent {
 
 
   onPullDownRefresh() {
-    this.request()
+    if (this.state.current == 0) {
+      this.request()
+    } else {
+      this.requestDeveloper()
+    }
+
   }//下拉事件
   // Taro.stopPullDownRefresh()//停止下拉动作过渡
 
@@ -53,7 +66,24 @@ export default class Index extends PureComponent {
       })
     })
   }
+  requestDeveloper = () => {
+    let _this = this
+    netWork.trendingNetRequestGet(netWork.Api.developer, undefined, true).then((res) => {
+      Taro.stopPullDownRefresh()
+      _this.setState({
+        developer: res.data.items
+      })
+    })
+  }
 
+  handleClick(value) {
+    this.setState({
+      current: value
+    })
+    if (this.state.developer.length == 0) {
+      this.requestDeveloper()
+    }
+  }
 
   render() {
     if (!this.state.isLoaded) {
@@ -65,9 +95,18 @@ export default class Index extends PureComponent {
       )
     })
     return (
-
-      <View className='index pageIndex'>
+      <View className='index pageIndex' style={{ marginTop: GlobalData.tabBarHeight + 'px' }}>
         {list}
+
+        <CustomNavBar >
+          <AtSegmentedControl
+            values={['repo', 'users']}
+            selectedColor='#fff'
+            color='#0366d6'
+            onClick={this.handleClick.bind(this)}
+            current={this.state.current}
+          />
+        </CustomNavBar>
       </View>
     )
   }

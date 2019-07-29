@@ -22,13 +22,19 @@ export default class RepoItem extends Taro.PureComponent {
         let avatars = _data.avatars || []
         let avatarsView
         if (avatars.length > 0) {
-            avatarsView = <View className='buildBy'>
-                {
-                    avatars.map((item) => {
-                        return <Image className='avatarImage' src={item} />
-                    })
-                }
+            avatarsView = <View className='bottomView'>
+                <View className='buildBy'>
+                    {
+                        avatars.map((item) => {
+                            return <Image className='avatarImage' src={item} />
+                        })
+                    }
+                </View>
+                {_data.added_stars ? <IconTextView title={_data.added_stars} image={icon_text_star} /> : ''}
+
+
             </View>
+
         } else {
             ''
         }
@@ -49,18 +55,11 @@ export default class RepoItem extends Taro.PureComponent {
                 </View>
                 <View className='desc'>{_data.desc}</View>
                 <View className='prop'>
-                    {_data.lang ? <LangView title={_data.lang} bgColor={'f1e05a'} /> : ''}
-                    {_data.stars ? <IconTextView title={_data.stars} image={icon_text_star} /> : ''}
-                    {_data.forks ? <IconTextView title={_data.forks} image={icon_text_fork} /> : ''}
+                    {_data.lang ? <View className='langView'><LangView title={_data.lang} bgColor={'f1e05a'} /> </View> : ''}
+                    {_data.stars ? <View className={_data.lang ? 'propItem' : ''}><IconTextView title={_data.stars} image={icon_text_star} /></View> : ''}
+                    {_data.forks ? <View className={(_data.lang || _data.stars) ? 'propItem' : ''}><IconTextView title={_data.forks} image={icon_text_fork} /></View> : ''}
                 </View>
-                <View className='bottomView'>
-                    {avatarsView}
-                    {_data.added_stars ? <IconTextView title={_data.added_stars} image={icon_text_star} /> : ''}
-
-
-                </View>
-
-
+                {avatarsView}
             </View>
         )
     }

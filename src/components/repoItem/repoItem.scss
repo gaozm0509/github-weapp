@@ -2,7 +2,7 @@
   background: white;
   padding-left: 5%;
   padding-right: 5%;
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 10px solid #f4f6f8;
@@ -23,11 +23,8 @@
     margin-top: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     .propItem {
-      width: 100px;
-      height: 60px;
-      background: #f4f6f8;
+      margin-left: 20px;
     } // .propItem
   } // .prop
 
