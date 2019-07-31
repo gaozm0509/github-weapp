@@ -39,8 +39,7 @@ export default class RepoItem extends Taro.PureComponent {
             ''
         }
         return (
-            /**
-     * added_stars: "116 stars today"
+            /*** added_stars: "116 stars today"
       avatars: (5) ["https://avatars0.githubusercontent.com/u/23621655?s=40&v=4", "https://avatars3.githubusercontent.com/u/43715439?s=40&v=4", "https://avatars2.githubusercontent.com/u/23149796?s=40&v=4", "https://avatars3.githubusercontent.com/u/47393639?s=40&v=4", "https://avatars1.githubusercontent.com/u/43502196?s=40&v=4"]
       desc: "This is an attempt to modify Dive into Deep Learning, Berkeley STAT 157 (Spring 2019) textbook's code into PyTorch."
       forks: "65"
