@@ -11,7 +11,7 @@ import Api from './api'
  * @param {是否展示loading} isloading 
  * @param {是否是trending api,host为 trendingHost} isTrending 
  */
-function netRequest(api, params, method, isNoLoading, isTrending) {
+function netRequest(api, params, method, isNoLoading) {
     return new Promise((resolve, reject) => {
         if (!isNoLoading) {
             Taro.showLoading({
@@ -19,7 +19,7 @@ function netRequest(api, params, method, isNoLoading, isTrending) {
             })
         }
         Taro.request({
-            url: (isTrending ? Api.trendingHost : Api.host) + api,
+            url: Api.host + api,
             data: params,
             method: method,
             success: (res) => {
@@ -44,10 +44,10 @@ function netRequest(api, params, method, isNoLoading, isTrending) {
 
 export default {
     Api,
-    netRequestGet: (api, params, method, isloading) => {
-        return netRequest(api, params, 'GET', isloading)
+    netRequestGet: (api, params, method, isNoLoading) => {
+        return netRequest(api, params, 'GET', isNoLoading)
     },
-    netRequestPOST: (api, params, method, isloading) => {
-        return netRequest(api, params, 'POST', isloading)
+    netRequestPOST: (api, params, method, isNoLoading) => {
+        return netRequest(api, params, 'POST', isNoLoading)
     }
 }

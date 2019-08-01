@@ -1,11 +1,12 @@
 import Taro, { PureComponent } from '@tarojs/taro'
-import { View, Swiper, SwiperItem, ScrollView, } from '@tarojs/components'
+import { View, } from '@tarojs/components'
 import netWork from '../../net/netWork'
 import { Loading } from '../../components/loading'
 import RepoItem from '../../components/repoItem/repoItem'
 import { AtSegmentedControl } from 'taro-ui'
 import CustomNavBar from '../../components/customNavBar/customNavBar'
 import DevItem from '../../components/devItem/devItem'
+import Drawer from '../../components/trending/drawer'
 
 import GlobalData from '../../utils/globalData'
 
@@ -30,7 +31,8 @@ export default class Index extends PureComponent {
       developer: [],
       count: 0,
       isLoaded: false,
-      current: 0
+      current: 0,
+      isDrawerOpen: false,
     }
   }
 
@@ -58,7 +60,7 @@ export default class Index extends PureComponent {
   onReachBottom() { }//上拉事件监听
   request = () => {
     let _this = this
-    netWork.netRequestGet(netWork.Api.repo, undefined, true).then((res) => {
+    netWork.netRequestGet(netWork.Api.repo, undefined, false).then((res) => {
       Taro.stopPullDownRefresh()
       _this.setState({
         isLoaded: true,
@@ -69,7 +71,7 @@ export default class Index extends PureComponent {
   }
   requestDeveloper = () => {
     let _this = this
-    netWork.netRequestGet(netWork.Api.developer, undefined, true).then((res) => {
+    netWork.netRequestGet(netWork.Api.developer, undefined, false).then((res) => {
       Taro.stopPullDownRefresh()
       _this.setState({
         developer: res.data
@@ -84,6 +86,18 @@ export default class Index extends PureComponent {
     if (this.state.developer.length == 0) {
       this.requestDeveloper()
     }
+  }
+
+  navBarLeftClick() {
+    // let _this = this
+    this.setState({
+      isDrawerOpen: !this.state.isDrawerOpen
+    })
+  }
+  closeDrawer = () => {
+    this.setState({
+      isDrawerOpen: false
+    })
   }
 
   render() {
@@ -106,10 +120,10 @@ export default class Index extends PureComponent {
     }
 
     return (
-      <View className='index pageIndex' style={{ marginTop: GlobalData.tabBarHeight + 'px' }}>
+      <View className='index pageIndex' style={{ marginTop: GlobalData.navBarHeight + 'px' }}>
         {listView}
-
-        <CustomNavBar >
+        <Drawer onCloseDrawer={this.closeDrawer} isOpen={this.state.isDrawerOpen} />
+        <CustomNavBar onLeftClick={this.navBarLeftClick.bind(this)} >
           <AtSegmentedControl
             values={['repo', 'users']}
             selectedColor='#fff'
@@ -117,7 +131,7 @@ export default class Index extends PureComponent {
             onClick={this.handleClick.bind(this)}
             current={this.state.current}
           />
-        </CustomNavBar>
+        </CustomNavBar >
       </View>
     )
   }

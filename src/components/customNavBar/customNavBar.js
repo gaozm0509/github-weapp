@@ -46,34 +46,23 @@ export default class CustomNavBar extends Component {
     }
 
     static defaultProps = {
-        backgroundColor: '#0366d6',
-        isWhite: false,
-        title: '',
-        backSkip: 0,
-        navBarPlaceholderHeight: (globalData.isStraightBangs ? 84 : 64)
     }
 
 
     componentWillMount() {
     }
 
-    onNavBack(backSkip) {
-        Taro.navigateBack({ delta: 1 + backSkip });
-
-        // Taro.navigateBack();
-    }
-
-    onLeftIconClick() {
-        this.props.onLeftIconClick()
+    languageClick(){
+        this.props.onLeftClick()
     }
 
     render() {
         let title = this.props.title || ''
-        let leftTitle = this.props.leftTitle || ''
+        let leftTitle = this.props.leftTitle || 'language'
         let normalNaV = (
             <View style={{ height: (globalData.isStraightBangs ? 84 : 64) + 'px', backgroundColor: '#0366d6' }} className='customNavBar bgColor'>
                 <View className='subNavBar'>
-                    <View className='leftView'>
+                    <View className='leftView' onClick = {this.languageClick}>
                         <Text>{leftTitle}</Text>
                     </View>
                     {title ? <View className='title'>{title}</View> : ''}

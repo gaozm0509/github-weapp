@@ -54,7 +54,7 @@ let platform = appSystem.platform
 
 let straightBangArray = ['iPhone X']
 let isStraightBangs = appSystem.model ? verifyStraightBangs(appSystem.model) : false // 判断刘海
-let tabBarHeight = isStraightBangs ? 84 : 64
+let navBarHeight = isStraightBangs ? 84 : 64
 
 function verifyStraightBangs(params) {
     if (params.indexOf(straightBangArray) != -1) {
@@ -70,6 +70,6 @@ export default {
     H: screenHeight,
     W: screenWidth,
     isStraightBangs: isStraightBangs,
-    tabBarHeight: tabBarHeight,
+    navBarHeight: navBarHeight,
     platform: platform,
 }

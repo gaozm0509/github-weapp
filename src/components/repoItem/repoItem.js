@@ -25,8 +25,8 @@ export default class RepoItem extends Taro.PureComponent {
             avatarsView = <View className='bottomView'>
                 <View className='buildBy'>
                     {
-                        avatars.map((item) => {
-                            return <Image className='avatarImage' src={item} />
+                        avatars.map((item, index) => {
+                            return <Image className={'avatarImage' + ' avatarImage' + index} src={item} />
                         })
                     }
                 </View>
