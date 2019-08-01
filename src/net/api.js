@@ -1,13 +1,9 @@
-const host = 'http://api.github.com'
-const trendingHost = 'https://trendings.herokuapp.com'
-//https://pro.gzmwebsite.info
+const host = 'https://pro.gzmwebsite.info/api'
 const repo = '/repo'
-const developer = '/developer'
+const developer = '/dev'
 const lang = '/lang'
 export default {
     host,
-    trendingHost,
-
     /**
      * trending repo
      */

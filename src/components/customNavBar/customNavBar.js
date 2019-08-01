@@ -68,77 +68,26 @@ export default class CustomNavBar extends Component {
     }
 
     render() {
-        let backgroundColor = this.props.backgroundColor || '#0366d6'
-        let image = this.props.image
-        let isWhite = this.props.isWhite
-        let title = this.props.title
-        let backSkip = this.props.backSkip || 0
-        // let navBarPlaceholderHeight = this.props.navBarPlaceholderHeight
-
-        //非首页要展示 back 按钮
-        let isBackShow = (Taro.getCurrentPages().length != 1)
-        let isLeftIconShow = this.props.isLeftIconShow
-        // 返回按钮
-        let wihtiBack = (
-            <CoverView onClick={this.onNavBack.bind(this, backSkip)} className='imageViewClass'>
-                <CoverImage src={backWhite} aria-hidden="true" className='backWihte' />
-            </CoverView>
-        )
-
-        let leftIcon = (
-            <CoverView onClick={this.onLeftIconClick} className='imageViewClass'>
-                <CoverImage style={{ 'top': (globalData.isStraightBangs ? 50 : 30) + 'px' }} className='leftIcon' src={this.props.leftIcon} />
-            </CoverView>
-        )
-
-        // 默认的头部
+        let title = this.props.title || ''
+        let leftTitle = this.props.leftTitle || ''
         let normalNaV = (
-            <View style={{ height: (globalData.isStraightBangs ? 84 : 64) + 'px', backgroundColor: backgroundColor }} className='customNavBar bgColor'>
+            <View style={{ height: (globalData.isStraightBangs ? 84 : 64) + 'px', backgroundColor: '#0366d6' }} className='customNavBar bgColor'>
                 <View className='subNavBar'>
-                    {(!isBackShow && !isLeftIconShow) ? <View className='imageViewClass'></View> : ''}
-                    {isBackShow ? wihtiBack : ''}
-                    {isLeftIconShow ? leftIcon : ''}
-                    {title ? <View className='title'>{title}</View> : ''}
-                    {this.props.children}
-                    <View className='imageViewClass'></View>
-                </View>
-            </View>
-        )
-
-        // 头部带 log 的 nav
-        let imageView = (image ? <CoverImage src={image} className='navLogo' /> : '')
-        let iconNav = (
-            <View style={{ height: (globalData.isStraightBangs ? 84 : 64) + 'px' }} className='customNavBar bgColor'>
-                <View className='subNavBar'>
-                    {isLeftIconShow ? leftIcon : ''}
-                    {isBackShow ? wihtiBack : ''}
-                    {(!isBackShow && !isLeftIconShow) ? <View className='backWihte'></View> : ''}
-                    <View className='navLogoView'>
-                        {imageView}
-                        <View className='title'>{title}</View>
+                    <View className='leftView'>
+                        <Text>{leftTitle}</Text>
                     </View>
-
-                    <View className='backWihte'></View>
+                    {title ? <View className='title'>{title}</View> : ''}
+                    <View className='childrenView'>
+                        {this.props.children}
+                    </View>
+                    <View className='leftView'>
+                    </View>
                 </View>
             </View>
         )
-
-        // 白色的 nav 
-        let whiteNav = (
-            <CoverView style={{ height: (globalData.isStraightBangs ? 84 : 64) + 'px' }} className='customNavBar customNavWhiteBar'>
-                <CoverView className='subNavBar'>
-                    {isLeftIconShow ? leftIcon : ''}
-                    {isBackShow ? blackBack : ''}
-                    {(!isBackShow && !isLeftIconShow) ? <CoverView className='backWihte'></CoverView> : ''}
-                    <CoverView className='title whiteNavTitle'>{title}</CoverView>
-                    <CoverView className='backWihte'></CoverView>
-                </CoverView>
-            </CoverView>
-        )
-
         return (
             <View>
-                {isWhite ? whiteNav : (image ? iconNav : normalNaV)}
+                {normalNaV}
             </View>
         )
     }

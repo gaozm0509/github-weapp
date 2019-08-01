@@ -15,7 +15,7 @@ function netRequest(api, params, method, isNoLoading, isTrending) {
     return new Promise((resolve, reject) => {
         if (!isNoLoading) {
             Taro.showLoading({
-                title: '',
+                title: 'loading...',
             })
         }
         Taro.request({
@@ -44,12 +44,6 @@ function netRequest(api, params, method, isNoLoading, isTrending) {
 
 export default {
     Api,
-    trendingNetRequestGet: (api, params, isloading) => {
-        return netRequest(api, params, 'GET', isloading, true)
-    },
-    trendingNetRequestPOST: (api, params, isloading) => {
-        return netRequest(api, params, 'POST', isloading, true)
-    },
     netRequestGet: (api, params, method, isloading) => {
         return netRequest(api, params, 'GET', isloading)
     },

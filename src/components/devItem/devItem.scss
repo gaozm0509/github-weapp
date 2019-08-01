@@ -1,0 +1,49 @@
+.devItem {
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 10px solid #f4f6f8;
+
+  .avatarView {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    image {
+      width: 80px;
+      height: 80px;
+    } //image
+  } //avatarView
+  .rightView {
+    margin-left: 20px;
+    width: 610px;
+    text {
+      display: block;
+    } //text
+    .fullName {
+      font-size: 36px;
+    //   font-weight: 700;
+      line-height: 36px;
+      color: #24292e;
+    } //fullName
+    .name {
+      font-size: 32px;
+      color: #586069;
+    } // name
+    .app {
+      color: #24292e;
+      font-size: 32px;
+    //   font-weight: 700;
+    } // app
+    .appDes {
+      font-size: 26px;
+      color: #586069;
+      // word-break: break-all;
+      word-wrap: break-word;
+      line-height: 30px;
+    } //appDes
+  } //rightView
+}

@@ -54,7 +54,7 @@ export default class RepoItem extends Taro.PureComponent {
                 </View>
                 <View className='desc'>{_data.desc}</View>
                 <View className='prop'>
-                    {_data.lang ? <View className='langView'><LangView title={_data.lang} bgColor={'f1e05a'} /> </View> : ''}
+                    {_data.lang ? <View className='langView'><LangView title={_data.lang} bgColor={_data.lang_color} /> </View> : ''}
                     {_data.stars ? <View className={_data.lang ? 'propItem' : ''}><IconTextView title={_data.stars} image={icon_text_star} /></View> : ''}
                     {_data.forks ? <View className={(_data.lang || _data.stars) ? 'propItem' : ''}><IconTextView title={_data.forks} image={icon_text_fork} /></View> : ''}
                 </View>

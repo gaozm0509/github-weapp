@@ -5,6 +5,7 @@ import { Loading } from '../../components/loading'
 import RepoItem from '../../components/repoItem/repoItem'
 import { AtSegmentedControl } from 'taro-ui'
 import CustomNavBar from '../../components/customNavBar/customNavBar'
+import DevItem from '../../components/devItem/devItem'
 
 import GlobalData from '../../utils/globalData'
 
@@ -29,7 +30,7 @@ export default class Index extends PureComponent {
       developer: [],
       count: 0,
       isLoaded: false,
-      curren: 0
+      current: 0
     }
   }
 
@@ -57,21 +58,21 @@ export default class Index extends PureComponent {
   onReachBottom() { }//上拉事件监听
   request = () => {
     let _this = this
-    netWork.trendingNetRequestGet(netWork.Api.repo, undefined, true).then((res) => {
+    netWork.netRequestGet(netWork.Api.repo, undefined, true).then((res) => {
       Taro.stopPullDownRefresh()
       _this.setState({
         isLoaded: true,
-        data: res.data.items,
-        count: res.data.count
+        data: res.data,
+        count: res.data
       })
     })
   }
   requestDeveloper = () => {
     let _this = this
-    netWork.trendingNetRequestGet(netWork.Api.developer, undefined, true).then((res) => {
+    netWork.netRequestGet(netWork.Api.developer, undefined, true).then((res) => {
       Taro.stopPullDownRefresh()
       _this.setState({
-        developer: res.data.items
+        developer: res.data
       })
     })
   }
@@ -89,14 +90,24 @@ export default class Index extends PureComponent {
     if (!this.state.isLoaded) {
       return <Loading />
     }
-    let list = this.state.data.map((item) => {
-      return (
-        <RepoItem data={item} />
-      )
-    })
+    let listView
+    if (this.state.current == 0) {
+      listView = this.state.data.map((item) => {
+        return (
+          <RepoItem data={item} />
+        )
+      })
+    } else {
+      listView = this.state.developer.map((item) => {
+        return (
+          <DevItem data={item} />
+        )
+      })
+    }
+
     return (
       <View className='index pageIndex' style={{ marginTop: GlobalData.tabBarHeight + 'px' }}>
-        {list}
+        {listView}
 
         <CustomNavBar >
           <AtSegmentedControl
