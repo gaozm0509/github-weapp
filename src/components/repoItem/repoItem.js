@@ -10,9 +10,6 @@ import './repoItem.scss'
 export default class RepoItem extends Taro.PureComponent {
     constructor(props) {
         super(props)
-        this.status = {
-            _data: {}
-        }
     }
 
 

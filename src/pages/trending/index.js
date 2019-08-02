@@ -32,7 +32,9 @@ export default class Index extends PureComponent {
       count: 0,
       isLoaded: false,
       current: 0,
-      isDrawerOpen: false,
+      isDrawerOpen: undefined,
+      lang: '', //当亲选中的语言
+      since: 'daily' //daily weekly monthly
     }
   }
 
@@ -43,24 +45,32 @@ export default class Index extends PureComponent {
   }
 
   componentDidMount() {
-    this.request()
+    this.goRequest()
   }
 
 
   onPullDownRefresh() {
+    this.goRequest()
+  }//下拉事件
+  // Taro.stopPullDownRefresh()//停止下拉动作过渡
+
+  goRequest = () => {
     if (this.state.current == 0) {
       this.request()
     } else {
       this.requestDeveloper()
     }
-
-  }//下拉事件
-  // Taro.stopPullDownRefresh()//停止下拉动作过渡
+  }
 
   onReachBottom() { }//上拉事件监听
   request = () => {
+    let params = {}
+    if (this.state.lang) {
+      params['lang'] = this.state.lang
+    }
+    params['since'] = this.state.since
     let _this = this
-    netWork.netRequestGet(netWork.Api.repo, undefined, false).then((res) => {
+    netWork.netRequestGet(netWork.Api.repo, params, false).then((res) => {
       Taro.stopPullDownRefresh()
       _this.setState({
         isLoaded: true,
@@ -70,8 +80,13 @@ export default class Index extends PureComponent {
     })
   }
   requestDeveloper = () => {
+    let params = {}
+    if (this.state.lang) {
+      params['lang'] = this.state.lang
+    }
+    params['since'] = this.state.since
     let _this = this
-    netWork.netRequestGet(netWork.Api.developer, undefined, false).then((res) => {
+    netWork.netRequestGet(netWork.Api.developer, params, false).then((res) => {
       Taro.stopPullDownRefresh()
       _this.setState({
         developer: res.data
@@ -99,6 +114,15 @@ export default class Index extends PureComponent {
       isDrawerOpen: false
     })
   }
+  getLang = (lang) => {
+    this.setState({
+      lang: lang,
+      isDrawerOpen: false
+    }, () => {
+      this.goRequest()
+    })
+
+  }
 
   render() {
     if (!this.state.isLoaded) {
@@ -119,11 +143,13 @@ export default class Index extends PureComponent {
       })
     }
 
+
     return (
       <View className='index pageIndex' style={{ marginTop: GlobalData.navBarHeight + 'px' }}>
+        <View></View>
         {listView}
-        <Drawer onCloseDrawer={this.closeDrawer} isOpen={this.state.isDrawerOpen} />
-        <CustomNavBar onLeftClick={this.navBarLeftClick.bind(this)} >
+        <Drawer onGetLang={this.getLang} onCloseDrawer={this.closeDrawer} isOpen={this.state.isDrawerOpen} />
+        <CustomNavBar leftTitle={this.state.lang} onLeftClick={this.navBarLeftClick.bind(this)} >
           <AtSegmentedControl
             values={['repo', 'users']}
             selectedColor='#fff'

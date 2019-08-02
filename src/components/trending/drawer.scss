@@ -1,10 +1,11 @@
 .drawer {
+  display: none;
+}
+.drawerCustom {
   position: fixed;
   width: 750px;
   left: 0;
-  background-color: rgba($color: #000000, $alpha: 0);
-  //   display: none;
-  //   display: none;
+
   .drawerContainer {
     position: relative;
     width: 550px;
@@ -15,7 +16,7 @@
 }
 
 .drawerClose {
-  display: none;
+  // display: none;
   animation-duration: 0.5s;
   animation-name: drawer-name;
   animation-fill-mode: forwards;
@@ -30,25 +31,21 @@
   animation-duration: 0.5s;
   animation-name: drawerOpen-name;
   animation-fill-mode: forwards;
-  //   display: block;
+  display: block;
 }
 @keyframes drawer-name {
   from {
-    display: block;
     background-color: rgba($color: #000000, $alpha: 0.3);
   }
   to {
-    display: none;
     background-color: rgba($color: #000000, $alpha: 0);
   }
 }
 @keyframes drawerOpen-name {
   from {
-    display: none;
     background-color: rgba($color: #000000, $alpha: 0);
   }
   to {
-    display: block;
     background-color: rgba($color: #000000, $alpha: 0.3);
   }
 }
@@ -73,5 +70,33 @@
   }
   to {
     left: -550px;
+  }
+}
+
+.drawerScrollView {
+  text {
+    padding-left: 20px;
+    display: block;
+  }
+  .langGroup {
+    .langTitle {
+      background-color: #f4f6f8;
+      height: 40px;
+      text {
+        font-size: 30px;
+        color: black;
+        line-height: 40px;
+      }
+    }
+    .langItem {
+      background: white;
+      border-bottom: 1px solid #eaecef;
+      height: 88px;
+      text {
+        font-size: 28px;
+        color: #586069;
+        line-height: 88px;
+      }
+    }
   }
 }

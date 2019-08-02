@@ -44,10 +44,10 @@ function netRequest(api, params, method, isNoLoading) {
 
 export default {
     Api,
-    netRequestGet: (api, params, method, isNoLoading) => {
+    netRequestGet: (api, params, isNoLoading) => {
         return netRequest(api, params, 'GET', isNoLoading)
     },
-    netRequestPOST: (api, params, method, isNoLoading) => {
+    netRequestPOST: (api, params, isNoLoading) => {
         return netRequest(api, params, 'POST', isNoLoading)
     }
 }
