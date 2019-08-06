@@ -1,5 +1,4 @@
-client/dist/
-client/node_modules/
+dist/
 deploy_versions/
 .temp/
 .rn_temp/

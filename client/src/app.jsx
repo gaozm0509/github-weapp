@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import Index from './pages/topics/index'
+import Index from './pages/index'
 
 import './app.scss'
 
@@ -18,7 +18,6 @@ class App extends Component {
       'pages/me/index',
       'pages/repoDetails/repoDetail'
     ],
-    
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#0366d6',
@@ -50,10 +49,15 @@ class App extends Component {
       selectedColor: '#0366d6',
       backgroundColor: '#fff',
       borderStyle: 'black'
-    }
+    },
+    cloud: true
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    if (process.env.TARO_ENV === 'weapp') {
+      Taro.cloud.init()
+    }
+  }
 
   componentDidShow() { }
 

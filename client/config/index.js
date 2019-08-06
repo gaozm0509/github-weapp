@@ -1,6 +1,6 @@
 const config = {
-  projectName: 'github-weapp',
-  date: '2019-7-27',
+  projectName: 'myApp',
+  date: '2019-8-6',
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
@@ -28,20 +28,11 @@ const config = {
   },
   copy: {
     patterns: [
-      {
-        from: 'src/wemark',
-        to: 'dist/wemark',
-      },
     ],
     options: {
     }
   },
   weapp: {
-    compile: {
-      exclude: [
-        'src/wemark/remarkable.js',
-      ]
-    },
     module: {
       postcss: {
         autoprefixer: {
