@@ -1,6 +1,9 @@
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env: 'bitsum-707ce8',
+  traceUser: true
+})
 
 
 exports.main = async () => {
