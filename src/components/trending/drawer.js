@@ -57,6 +57,9 @@ export default class Drawer extends Taro.PureComponent {
         this.props.onCloseDrawer()
     }
     langItemClick = (item) => {
+        if (item === '全部') {
+            item = ''
+        }
         this.props.onGetLang(item)
     }
     search = (e) => {
@@ -96,6 +99,7 @@ export default class Drawer extends Taro.PureComponent {
                 fl_list.push(fl)
             }
         }
+        fl_list.sort()
         for (let index = 0; index < fl_list.length; index++) {
             const fl = fl_list[index];
             let list = []
@@ -108,7 +112,7 @@ export default class Drawer extends Taro.PureComponent {
             }
             reuslts.push(list)
         }
-
+        reuslts.unshift(['全部'])
         return reuslts
     }
 
@@ -128,10 +132,13 @@ export default class Drawer extends Taro.PureComponent {
         }
         let langList = this.state.languageList
         let langView = langList.map((groupItem, index) => {
-            let lf = groupItem[0].slice(0, 1).toUpperCase()
+            let lf
+            if (groupItem[0] != '全部') {
+                lf = groupItem[0].slice(0, 1).toUpperCase()
+            }
             return (
                 <View className='langGroup'>
-                    <View className='langTitle'><Text>{lf}</Text></View>
+                    {lf ? <View className='langTitle'><Text>{lf}</Text></View> : ''}
                     {
                         groupItem.map((item) => {
                             return (

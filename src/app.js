@@ -15,7 +15,8 @@ class App extends Component {
     pages: [
       'pages/trending/index',
       'pages/topics/index',
-      'pages/me/index'
+      'pages/me/index',
+      'pages/repoDetails/repoDetail'
     ],
     
     window: {

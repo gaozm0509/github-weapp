@@ -18,11 +18,10 @@
 */
 
 import Taro, { Component } from '@tarojs/taro'
-import { View, CoverView, CoverImage } from '@tarojs/components'
-
+import { View, } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
 import globalData from '../../utils/globalData'
 import './customNavBar.scss'
-import backWhite from './assets/back-white.png'
 
 
 
@@ -52,7 +51,7 @@ export default class CustomNavBar extends Component {
     componentWillMount() {
     }
 
-    languageClick(){
+    languageClick() {
         this.props.onLeftClick()
     }
 
@@ -62,14 +61,17 @@ export default class CustomNavBar extends Component {
         let normalNaV = (
             <View style={{ height: (globalData.isStraightBangs ? 84 : 64) + 'px', backgroundColor: '#0366d6' }} className='customNavBar bgColor'>
                 <View className='subNavBar'>
-                    <View className='leftView' onClick = {this.languageClick}>
-                        <Text>{leftTitle}</Text>
+                    <View className='leftView' onClick={this.languageClick}>
+                        <Text className='langText'>{leftTitle}</Text>
+                        <AtIcon className='atIconText' value='chevron-down' size='14' color='#fff'></AtIcon>
                     </View>
                     {title ? <View className='title'>{title}</View> : ''}
                     <View className='childrenView'>
                         {this.props.children}
                     </View>
-                    <View className='leftView'>
+                    <View className='leftView' style={{ visibility: 'hidden' }}>
+                        <Text className='langText'>{leftTitle}</Text>
+                        <AtIcon className='atIconText' value='chevron-down' size='14' color='#fff'></AtIcon>
                     </View>
                 </View>
             </View>

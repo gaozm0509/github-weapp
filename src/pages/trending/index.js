@@ -1,4 +1,4 @@
-import Taro, { PureComponent } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { View, } from '@tarojs/components'
 import netWork from '../../net/netWork'
 import { Loading } from '../../components/loading'
@@ -14,7 +14,7 @@ import './index.scss'
 import { from } from 'rxjs';
 import { red } from 'ansi-colors';
 
-export default class Index extends PureComponent {
+export default class Index extends Taro.PureComponent {
 
   config = {
     navigationBarTitleText: '首页',
@@ -124,6 +124,12 @@ export default class Index extends PureComponent {
 
   }
 
+  repoItemClick = (repo) => {
+    Taro.navigateTo({
+      url: '../repoDetails/repoDetail?repo=' + repo
+    })
+  }
+
   render() {
     if (!this.state.isLoaded) {
       return <Loading />
@@ -132,7 +138,7 @@ export default class Index extends PureComponent {
     if (this.state.current == 0) {
       listView = this.state.data.map((item) => {
         return (
-          <RepoItem data={item} />
+          <RepoItem onRepoItemClick={this.repoItemClick} data={item} />
         )
       })
     } else {
@@ -146,8 +152,9 @@ export default class Index extends PureComponent {
 
     return (
       <View className='index pageIndex' style={{ marginTop: GlobalData.navBarHeight + 'px' }}>
-        <View></View>
-        {listView}
+        <View>
+          {listView}
+        </View>
         <Drawer onGetLang={this.getLang} onCloseDrawer={this.closeDrawer} isOpen={this.state.isDrawerOpen} />
         <CustomNavBar leftTitle={this.state.lang} onLeftClick={this.navBarLeftClick.bind(this)} >
           <AtSegmentedControl

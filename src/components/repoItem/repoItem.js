@@ -45,7 +45,7 @@ export default class RepoItem extends Taro.PureComponent {
       repo_link: "https://github.com/dsgiitr/d2l-pytorch"
       stars: "301"
      */
-            <View className='repoItemView'>
+            <View className='repoItemView' onClick = {this.props.onRepoItemClick.bind(this,_data.repo)}>
                 <View className='title'>
                     <Text>{_data.repo}</Text>
                 </View>

@@ -1,0 +1,37 @@
+.repoDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .desView {
+    padding: 10px;
+    text {
+      color: #fff;
+      font-size: 30px;
+      display: block;
+    } //text
+  } //desView
+  .atGridView {
+    margin-top: 20px;
+    width: 710px;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+  } // atGridView
+  .titleView {
+    border-bottom: 2px solid #d6e4ef;
+    height: 80px;
+    text {
+      line-height: 80px;
+      margin-left: 20px;
+      display: flex;
+      color: #586069;
+    } //text
+  } //titleView
+  .readmeView {
+      min-height: 100px;
+    .readme {
+      padding-left: 20px;
+      padding-right: 20px;
+    } //readme
+  } //readmeView
+}
