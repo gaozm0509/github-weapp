@@ -43,8 +43,7 @@ export default class Index extends Taro.PureComponent {
   }
 
   componentDidMount() {
-    // this.goRequest()
-    this.testClould()
+    this.goRequest()
   }
 
 
@@ -52,18 +51,6 @@ export default class Index extends Taro.PureComponent {
     this.goRequest()
   }//下拉事件
   // Taro.stopPullDownRefresh()//停止下拉动作过渡
-
-
-  testClould = () => {
-    Taro.cloud.callFunction({
-      name: 'api',
-      data: {
-        a: 1, b: 2
-      }
-    }).then((res) => {
-      console.log(res)
-    })
-  }
 
   goRequest = () => {
     if (this.state.current == 0) {

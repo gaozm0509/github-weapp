@@ -16,4 +16,12 @@ export default {
      * trending 语言类型
      */
     lang,
+    /**
+     * github v3 api
+     */
+    cloudApiTypeV3:'cloudApiTypeV3',
+    /**
+     * markdown 数据
+     */
+    cloudApiTypeMD:'cloudApiTypeMD',
 }
