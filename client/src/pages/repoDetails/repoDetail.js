@@ -5,6 +5,12 @@ import Api from '../../net/api'
 import { Loading } from '../../components/loading'
 
 import icon_text_fork from '../../assets/images/icon_text_fork.svg'
+import icon_text_star from '../../assets/images/icon_text_star.svg'
+import repo_commit from '../../assets/images/repo_commit.svg'
+import repo_eye from '../../assets/images/repo_eye.svg'
+import repo_issue from '../../assets/images/repo_issue.svg'
+import repo_contributors from '../../assets/images/repo_contributors.svg'
+
 
 import './repoDetail.scss'
 import { loadavg } from 'os';
@@ -19,7 +25,7 @@ export default class RepoDetail extends Taro.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            md: '',
+            md: 'loading...',
             data: {},
             repo: '',
             isLoaded: false
@@ -51,14 +57,28 @@ export default class RepoDetail extends Taro.PureComponent {
             name: 'api',
             data: {
                 type: Api.cloudApiTypeMD,
-                api: this.state.repo
+                api: this.state.repo,
+            },
+            success: res => {
+                this.setState({
+                    md: res.result
+                })
+            },
+            fail: res => {
+                this.setState({
+                    md: '请求失败，点击重试'
+                })
             }
-        }).then((res) => {
-            this.setState({
-                md: res.result
-            })
-            console.log(res.result)
         })
+    }
+
+    readmeRequestAgain = () => {
+        if (this.state.md == '请求失败，点击重试') {
+            this.setState({
+                md: 'loading...'
+            })
+            this.requestMD()
+        }
     }
 
     render() {
@@ -72,26 +92,26 @@ export default class RepoDetail extends Taro.PureComponent {
         let gridData = [
             {
                 image: icon_text_fork,
-                value: this.state.data.watchers
+                value: this.state.data.watchers // star
             },
             {
-                image: icon_text_fork,
+                image: icon_text_star,
                 value: this.state.data.forks
             },
             {
-                image: icon_text_fork,
-                value: this.state.data.subscribers_count
+                image: repo_eye,
+                value: this.state.data.subscribers_count //watch
             },
             {
-                image: icon_text_fork,
-                value: this.state.data.open_issues
+                image: repo_issue,
+                value: 'issues(' + this.state.data.open_issues + ')'
             },
             {
-                image: icon_text_fork,
+                image: repo_commit,
                 value: 'commits'
             },
             {
-                image: icon_text_fork,
+                image: repo_contributors,
                 value: 'contributors'
             },
         ]
@@ -108,8 +128,8 @@ export default class RepoDetail extends Taro.PureComponent {
                     <View className='titleView'>
                         <Text>README</Text>
                     </View>
-                    <View className='readme'>
-                        <wemark md={this.state.md ? this.state.md : 'loading...'} link highlight type='wemark' />
+                    <View className='readme' onClick={this.readmeRequestAgain}>
+                        <wemark md={this.state.md} link highlight type='wemark' />
                     </View>
                 </View >
             </View>

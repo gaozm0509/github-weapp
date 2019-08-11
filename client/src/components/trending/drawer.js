@@ -12,6 +12,7 @@ export default class Drawer extends Taro.PureComponent {
         this.state = {
             languageList: [],
             orignLanguageList: [],
+            isSelfHid: false, // 判断当前view是否存在，在动画结束和开始的时候修改其值
         }
     }
 
@@ -53,7 +54,7 @@ export default class Drawer extends Taro.PureComponent {
     clickContainer = (e) => {
         e.stopPropagation()
     }
-    click = () => {
+    click = (isOpen, e) => {
         this.props.onCloseDrawer()
     }
     langItemClick = (item) => {
@@ -119,6 +120,18 @@ export default class Drawer extends Taro.PureComponent {
     scroll = (e) => {
         e.stopPropagation()
     }
+    animationEnd = (e) => {
+        this.setState({
+            isSelfHid: !this.props.isOpen
+        })
+    }
+
+    animationStart = (e) => {
+        this.setState({
+            isSelfHid: false
+        })
+    }
+
 
     render() {
         let isOpen = this.props.isOpen
@@ -154,7 +167,7 @@ export default class Drawer extends Taro.PureComponent {
             )
         })
         return (
-            <View onClick={this.click.bind(this)} className={classNameDrawer} style={{ top: GlobalData.navBarHeight + 'px', height: (GlobalData.H - GlobalData.navBarHeight) + 'px' }}>
+            <View onClick={this.click.bind(this, isOpen)} onAnimationStart={this.animationStart} onAnimationEnd={this.animationEnd.bind(this)} className={classNameDrawer} style={{ top: GlobalData.navBarHeight + 'px', height: (GlobalData.H - GlobalData.navBarHeight) + 'px', visibility: this.state.isSelfHid ? 'hidden' : 'visible' }}>
                 <View onClick={this.clickContainer.bind(this)} className={isOpen ? 'drawerContainer drawerContainerOpen' : 'drawerContainer drawerContainerClose'}>
                     <AtSearchBar onChange={this.search.bind(this)}></AtSearchBar>
                     <ScrollView style={{ overflowY: 'auto', height: (GlobalData.H - GlobalData.navBarHeight) + 'px' }} scrollY={true} onScroll={this.scroll.bind(this)} className='drawerScrollView'>

@@ -39,9 +39,7 @@ exports.main = async (event, context) => {
   return new Promise(function (resolve, reject) {
     request(options, (error, response, body) => {
       // README 文件不需要转
-      if (type === cloudApiTypeV3) {
-        body = JSON.parse(body)
-      }
+      let jsonBody = JSON.parse(body)
       resolve(body)
     })
   })

@@ -52,24 +52,18 @@ let screenHeight = appSystem.screenHeight
 let screenWidth = appSystem.screenWidth
 let platform = appSystem.platform
 
-let straightBangArray = ['iPhone X']
-let isStraightBangs = appSystem.model ? verifyStraightBangs(appSystem.model) : false // 判断刘海
-let navBarHeight = isStraightBangs ? 84 : 64
+// 通过原生胶囊的位置判断navbar的高度
+let menuButtonBoundingRect = Taro.getMenuButtonBoundingClientRect()
+let navBarHeight = menuButtonBoundingRect.bottom + 8
 
-function verifyStraightBangs(params) {
-    if (params.indexOf(straightBangArray) != -1) {
-        return true;
-    } else {
-        return false;
-    }
-}
+
 export default {
     appSystem: appSystem,
     screenHeight: screenHeight,
     screenWidth: screenWidth,
     H: screenHeight,
     W: screenWidth,
-    isStraightBangs: isStraightBangs,
     navBarHeight: navBarHeight,
     platform: platform,
+    menuButtonBoundingRect,
 }
