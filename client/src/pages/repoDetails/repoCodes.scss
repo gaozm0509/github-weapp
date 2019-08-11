@@ -1,0 +1,33 @@
+.repoCodes {
+  .item {
+    background-color: #fff;
+    width: 710px;
+    height: 88px;
+    border-bottom: 2px solid #f4f6f8;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    .leftView {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 600px;
+      .image {
+        width: 40px;
+        height: 40px;
+      }
+      .imageFile {
+        width: 40px;
+        height: 30px;
+      }
+      .title {
+        display: block;
+        margin-left: 20px;
+        font-size: 30px;
+      }
+    }
+  }
+}

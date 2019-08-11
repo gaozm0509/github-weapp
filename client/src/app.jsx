@@ -16,7 +16,8 @@ class App extends Component {
       'pages/trending/index',
       'pages/topics/index',
       'pages/me/index',
-      'pages/repoDetails/repoDetail'
+      'pages/repoDetails/repoDetail',
+      'pages/repoDetails/repoCodes'
     ],
     window: {
       backgroundTextStyle: 'light',

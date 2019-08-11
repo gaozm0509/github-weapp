@@ -9,11 +9,9 @@ import icon_text_star from '../../assets/images/icon_text_star.svg'
 import repo_commit from '../../assets/images/repo_commit.svg'
 import repo_eye from '../../assets/images/repo_eye.svg'
 import repo_issue from '../../assets/images/repo_issue.svg'
-import repo_contributors from '../../assets/images/repo_contributors.svg'
-
+import repo_code from '../../assets/images/repo_code.svg'
 
 import './repoDetail.scss'
-import { loadavg } from 'os';
 
 export default class RepoDetail extends Taro.PureComponent {
     // config = {navigationBarTitleText:''}
@@ -80,6 +78,13 @@ export default class RepoDetail extends Taro.PureComponent {
             this.requestMD()
         }
     }
+    gridClick = (item) => {
+        if (item.index == 3) {
+            Taro.navigateTo({
+                url: './repoCodes?api=' + 'repos/' + this.state.repo+'/contents'
+            })
+        }
+    }
 
     render() {
 
@@ -91,28 +96,34 @@ export default class RepoDetail extends Taro.PureComponent {
 
         let gridData = [
             {
+                index: 0,
                 image: icon_text_fork,
                 value: this.state.data.watchers // star
             },
             {
+                index: 1,
                 image: icon_text_star,
                 value: this.state.data.forks
             },
             {
+                index: 2,
                 image: repo_eye,
                 value: this.state.data.subscribers_count //watch
             },
             {
+                index: 3,
+                image: repo_code,
+                value: 'code'
+            },
+            {
+                index: 4,
                 image: repo_issue,
                 value: 'issues(' + this.state.data.open_issues + ')'
             },
             {
+                index: 5,
                 image: repo_commit,
                 value: 'commits'
-            },
-            {
-                image: repo_contributors,
-                value: 'contributors'
             },
         ]
         return (
@@ -122,7 +133,7 @@ export default class RepoDetail extends Taro.PureComponent {
                     <View className='titleView'>
                         <Text>操作</Text>
                     </View>
-                    <AtGrid data={gridData}></AtGrid>
+                    <AtGrid onClick={this.gridClick.bind(this)} data={gridData}></AtGrid>
                 </View>
                 <View className='atGridView readmeView'>
                     <View className='titleView'>
